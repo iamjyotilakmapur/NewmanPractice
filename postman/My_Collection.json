@@ -80,7 +80,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"POST request status code is 201\", function() {\n    pm.response.to.have.status(200);\n});"
+              "pm.test(\"POST request status code is 200\", function() {\n    pm.response.to.have.status(200);\n});\npm.test(\"Response contains book ID\", function() {\n    pm.expect(pm.response.json().id).to.eql(1);\n});"
             ]
           }
         }
@@ -233,11 +233,19 @@
     },
     {
       "name": "PATCHmethod",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"PATCH request status code is 200\", function() {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"PATCH response contains updated title\", function() {\n    pm.expect(pm.response.json().title).to.eql(\"patched title\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
-        "method": "GET",
+        "method": "PATCH",
         "header": [],
         "body": {
           "mode": "raw",
